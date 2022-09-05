@@ -20,12 +20,12 @@ export default {
 @import "../assets/styles/style.scss";
 
 .header-name {
-  color: $primary-color-header;
+  color: $primary-color-gray;
   font-size: 35px;
 }
 .hr {
   border: none;
-  border-top: 1px solid primary-color-header;
+  border-top: 1px solid$primary-color-gray;
   height: 2px;
 }
 </style>
