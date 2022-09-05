@@ -1,8 +1,14 @@
 <template>
   <div class="item">
-    <input type="checkbox" :value="val" v-model="checked" @change="onChange" />
+    <input
+      type="checkbox"
+      :value="val"
+      v-model="checked"
+      @change="onChange"
+      :id="id"
+    />
     <label for="checkbox" class="item__name">{{ itemName }}</label>
-    <button class="item__button">Remove</button>
+    <button class="item__button" @click="deleteItem">Remove</button>
   </div>
 </template>
 
@@ -12,7 +18,8 @@ export default {
 
   props: {
     itemName: String,
-    val: Number,
+    val: Boolean,
+    id: String,
   },
   data() {
     return {
@@ -22,7 +29,7 @@ export default {
   computed: {
     checked: {
       get() {
-        return this.value;
+        return this.val;
       },
       set(val) {
         this.checkedProxy = val;
@@ -30,8 +37,12 @@ export default {
     },
   },
   methods: {
-    onChange: function () {
+    onChange() {
       this.$emit("input", this.checkedProxy);
+    },
+
+    deleteItem() {
+      this.$emit("delete", this.id);
     },
   },
 };
