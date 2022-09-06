@@ -19,7 +19,7 @@ export default {
   props: {
     itemName: String,
     val: Boolean,
-    id: String,
+    id: Number,
   },
   data() {
     return {
