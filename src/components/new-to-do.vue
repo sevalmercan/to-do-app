@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <input v-model="newToDoText" />
-    <button @click="addNewTask">ADD A NEW TASK</button>
+  <div class="new-to-do">
+    <input v-model="newToDoText"  class="new-to-do__input" placeholder="Wake Up"/>
+    <button @click="addNewTask" class="new-to-do__button">ADD A NEW TASK</button>
   </div>
 </template>
 
@@ -18,7 +18,38 @@ export default {
   methods: {
     addNewTask() {
       this.addNewItem(this.newToDoText);
+      this.clearInput();
+    },
+    clearInput() {
+      this.newToDoText = "";
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  @import "../assets/styles/style.scss";
+  
+.new-to-do{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 25px 15vw;
+  background-color: $primary-color;
+
+}
+
+.new-to-do__input{
+  width: 43vw;
+  height: 30px;
+  font-size: 20px;
+}
+
+.new-to-do__button {
+  margin-left: auto;
+  margin-right: 0;
+  background-color: white;
+  width: 17vw;
+  border: 3px solid $primary-color-gray;
+}
+</style>

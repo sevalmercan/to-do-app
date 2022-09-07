@@ -45,6 +45,7 @@ export default {
       this.$emit("delete", this.id);
     },
   },
+  
 };
 </script>
 

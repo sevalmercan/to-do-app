@@ -1,36 +1,28 @@
 <template>
-  <div class="container">
+  <div>
     <new-to-do />
-    <header-comp headerName="To Do" />
-    <div v-for="element in toDoArray" :key="element.id">
-      <to-do-item
-        v-model="element.checked"
-        :val="element.checked"
-        :itemName="element.name"
-        @delete="deleteItem"
-        :id="element.id"
-      />
+    <div class="tasks-container">
+      <task-container :taskArrayProp="array1" taskHeader="To Do"/>
+      <task-container :taskArrayProp="array2" taskHeader="Done"/>
     </div>
   </div>
 </template>
 
 <script>
 import toDoMixin from "./common/to-do-mixin";
-import headerComp from "./components/header.vue";
-import toDoItem from "./components/to-do-item.vue";
 import newToDo from "./components/new-to-do.vue";
+import taskContainer from "./container/task-container.vue";
 export default {
   mixins: [toDoMixin],
   components: {
-    headerComp,
-    toDoItem,
     newToDo,
+    taskContainer,
   },
 };
 </script>
 
 <style>
-.container {
+.tasks-container {
   margin: 0 15vw;
 }
 </style>
