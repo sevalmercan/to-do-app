@@ -13,6 +13,10 @@
 </template>
 
 <script>
+import { getDatabase, ref, update } from "firebase/database";
+import { app } from "../../firebase";
+
+const database = getDatabase(app);
 export default {
   name: "to-do-item",
 
@@ -39,13 +43,19 @@ export default {
   methods: {
     onChange() {
       this.$emit("input", this.checkedProxy);
+      const updates = {};
+      updates["users/" + "sevalmercan" + "/tasks/"+this.id] = {
+        checked: this.checkedProxy,
+        id: this.id,
+        name: this.itemName,
+      };
+      update(ref(database), updates)
     },
 
     deleteItem() {
       this.$emit("delete", this.id);
     },
   },
-  
 };
 </script>
 

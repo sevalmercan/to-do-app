@@ -2,9 +2,8 @@ import { state } from "./state";
 import { set, ref, getDatabase } from "firebase/database";
 import { app } from "../../firebase";
 import "firebase/compat/firestore";
-console.log({ app });
 const database = getDatabase(app);
-console.log({ database });
+
 export default {
   methods: {
     addNewItem(newToDo) {
