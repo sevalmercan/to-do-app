@@ -11,7 +11,7 @@ import { initializeApp } from "firebase/app";
   measurementId: "G-1N5JN8LQB4"
 };
 
-// Initialize Firebase
+// Initialize Firebased
 export const app = initializeApp(firebaseConfig);
 
 

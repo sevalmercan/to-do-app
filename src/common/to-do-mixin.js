@@ -1,36 +1,43 @@
 import { state } from "./state";
-import { set, ref } from "firebase/database";
-import { database } from "../../firebase"
+import { set, ref, getDatabase } from "firebase/database";
+import { app } from "../../firebase";
+import "firebase/compat/firestore";
+console.log({ app });
+const database = getDatabase(app);
+console.log({ database });
 export default {
   methods: {
     addNewItem(newToDo) {
-      //this.taskArray.push({ checked: false, name: newToDo, id: 3 });
-      /* set(ref(database, 'users/' + 'sevalmercan' + '/tasks/' + 3), {
-        checked: false,
-        name: "delii",
-        id: 3
-
-      }); */
+      set(
+        ref(
+          database,
+          "users/" + "sevalmercan" + "/tasks/" + state.taskArray.length
+        ),
+        {
+          checked: false,
+          name: newToDo,
+          id: state.taskArray.length,
+        }
+      );
     },
     deleteItem(id) {
-      this.taskArray = this.taskArray.filter((element) => element.id !== id);
+      set(ref(database, "users/" + "sevalmercan" + "/tasks/" + id), null);
     },
   },
   computed: {
     taskArray: {
       get() {
-        return state.taskArray
+        return state.taskArray;
       },
       set(value) {
         state.taskArray = value;
       },
     },
-    array1 (){
-      return this.taskArray.filter(todo => !todo.checked)
+    array1() {
+      return this.taskArray.filter((todo) => !todo.checked);
     },
-    array2 (){
-      return this.taskArray.filter(todo => todo.checked)
-    }
-    
+    array2() {
+      return this.taskArray.filter((todo) => todo.checked);
+    },
   },
 };

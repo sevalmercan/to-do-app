@@ -7,8 +7,6 @@
 
 <script>
 import toDoMixin from "@/common/to-do-mixin";
-import { set, ref } from "firebase/database";
-import { database } from "../../firebase"
 
 export default {
   mixins: [toDoMixin],
@@ -21,12 +19,6 @@ export default {
     addNewTask() {
       this.addNewItem(this.newToDoText);
       this.clearInput();
-      set(ref(database, 'users/' + 'sevalmercan' + '/tasks/' + 1), {
-        checked: false,
-        name: "emre",
-        id: 1
-
-      });
     },
     clearInput() {
       this.newToDoText = "";
