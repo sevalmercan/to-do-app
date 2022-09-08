@@ -1,12 +1,14 @@
 <template>
   <div class="new-to-do">
-    <input v-model="newToDoText"  class="new-to-do__input" placeholder="Wake Up"/>
+    <input v-model="newToDoText" class="new-to-do__input" placeholder="Wake Up" />
     <button @click="addNewTask" class="new-to-do__button">ADD A NEW TASK</button>
   </div>
 </template>
 
 <script>
 import toDoMixin from "@/common/to-do-mixin";
+import { set, ref } from "firebase/database";
+import { database } from "../../firebase"
 
 export default {
   mixins: [toDoMixin],
@@ -19,6 +21,12 @@ export default {
     addNewTask() {
       this.addNewItem(this.newToDoText);
       this.clearInput();
+      set(ref(database, 'users/' + 'sevalmercan' + '/tasks/' + 1), {
+        checked: false,
+        name: "emre",
+        id: 1
+
+      });
     },
     clearInput() {
       this.newToDoText = "";
@@ -28,9 +36,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "../assets/styles/style.scss";
-  
-.new-to-do{
+@import "../assets/styles/style.scss";
+
+.new-to-do {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -39,7 +47,7 @@ export default {
 
 }
 
-.new-to-do__input{
+.new-to-do__input {
   width: 43vw;
   height: 30px;
   font-size: 20px;
