@@ -1,6 +1,7 @@
 <template>
   <div>
-    <header-comp :headerName="taskHeader" />
+    <div class="header-name">{{ taskHeader }}</div>
+    <hr />
     <div v-for="element in taskArrayProp" :key="element.id">
       <to-do-item
         v-model="element.checked"
@@ -11,24 +12,34 @@
       />
     </div>
   </div>
-
 </template>
 
 <script>
-import headerComp from "@/components/header.vue";
 import toDoItem from "@/components/to-do-item.vue";
 import toDoMixin from "@/common/to-do-mixin";
 export default {
   mixins: [toDoMixin],
-  props:{
-    taskArrayProp :[],
-    taskHeader: String
+  props: {
+    taskArrayProp: [],
+    taskHeader: String,
   },
   components: {
-    headerComp,
     toDoItem,
   },
-  
-  
 };
 </script>
+
+<style lang="scss">
+@import "../assets/styles/style.scss";
+
+.header-name {
+  color: $primary-color-gray;
+  font-size: 35px;
+  display: flex;
+}
+.hr {
+  border: none;
+  border-top: 1px solid$primary-color-gray;
+  height: 2px;
+}
+</style>
