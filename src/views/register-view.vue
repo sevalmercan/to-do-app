@@ -1,6 +1,10 @@
 <template>
   <div>
-    <form @submit.prevent="register">
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/register">About</router-link>
+    </nav>
+    <form @submit.prevent="register" class="register">
       <h2>Register</h2>
       <input type="email" placeholder="Email address..." v-model="email" />
       <input type="password" placeholder="password..." v-model="password" />
@@ -36,3 +40,11 @@ export default {
   },
 };
 </script>
+<style>
+.register {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin: 0 auto;
+}
+</style>

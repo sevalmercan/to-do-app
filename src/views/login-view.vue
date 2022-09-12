@@ -1,5 +1,9 @@
 <template>
   <div class="home">
+    <nav>
+      <router-link to="/">Sign In</router-link> |
+      <router-link to="/register">Register</router-link>
+    </nav>
     <div>
       <form @submit.prevent="login" class="login">
         <h2>Login</h2>

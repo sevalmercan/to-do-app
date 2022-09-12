@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "home",
+    name: "Home",
     component: LoginView,
   },
   {
@@ -25,6 +25,9 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: ToDoApp,
+    meta: {
+      authRequired: true,
+    },
   },
 ];
 
@@ -33,5 +36,20 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
+/* router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.authRequired)) {
+    if (firebase.auth().currentUser) {
+      next();
+    } else {
+      alert('You must be logged in to see this page');
+      next({
+        path: '/',
+      });
+    }
+  } else {
+    next();
+  }
+}); */
 
 export default router;
