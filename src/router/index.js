@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import LoginView from "../views/login-view.vue";
-
+import ToDoApp from "../../src/to-do-app.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -17,6 +17,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import("../views/register-view.vue"),
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: ToDoApp,
   },
 ];
 
