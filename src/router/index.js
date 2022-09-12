@@ -1,4 +1,6 @@
 import Vue from "vue";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { app } from "../../firebase";
 import VueRouter from "vue-router";
 import LoginView from "../views/login-view.vue";
 import ToDoApp from "../views/to-do-app.vue";
@@ -37,19 +39,22 @@ const router = new VueRouter({
   routes,
 });
 
-/* router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.authRequired)) {
-    if (firebase.auth().currentUser) {
-      next();
+const auth = getAuth(app);
+onAuthStateChanged(auth, (user) => {
+  router.beforeEach((to, from, next) => {
+    if (to.matched.some((record) => record.meta.authRequired)) {
+      if (user) {
+        next();
+      } else if (!user) {
+        alert("You must be logged in to see this page");
+        next({
+          path: "/",
+        });
+      }
     } else {
-      alert('You must be logged in to see this page');
-      next({
-        path: '/',
-      });
+      next();
     }
-  } else {
-    next();
-  }
-}); */
+  });
+});
 
 export default router;
