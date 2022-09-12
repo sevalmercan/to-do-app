@@ -40,21 +40,23 @@ const router = new VueRouter({
 });
 
 const auth = getAuth(app);
+let currentUser = false;
 onAuthStateChanged(auth, (user) => {
-  router.beforeEach((to, from, next) => {
-    if (to.matched.some((record) => record.meta.authRequired)) {
-      if (user) {
-        next();
-      } else if (!user) {
-        alert("You must be logged in to see this page");
-        next({
-          path: "/",
-        });
-      }
-    } else {
-      next();
-    }
-  });
+  currentUser = user;
 });
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.authRequired)) {
+    if (currentUser) {
+      next();
+    } else {
+      alert("You must be logged in to see this page");
+      next({
+        path: "/",
+      });
+    }
+  } else {
+    next();
+  }
+});
 export default router;

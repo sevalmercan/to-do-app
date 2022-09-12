@@ -16,7 +16,7 @@ export default {
           this.$router.push("/");
         })
         .catch(() => {
-          // An error happened.
+          this.$router.push("/");
         });
     },
   },
