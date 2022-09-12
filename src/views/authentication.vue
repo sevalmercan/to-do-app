@@ -5,39 +5,36 @@
       <router-link to="/register">Register</router-link>
     </nav>
     <div>
-      <form @submit.prevent="login" class="login">
-        <h2>Login</h2>
+      <form @submit.prevent="authFunc" class="login">
+        <h2>{{ authType }}</h2>
         <input type="email" placeholder="Email address..." v-model="email" />
         <input type="password" placeholder="password..." v-model="password" />
-        <button type="submit">Login</button>
+        <button type="submit">{{ authType }}</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { app } from "../../firebase";
+import authenticationMixin from "@/common/authentication-mixin";
 
 export default {
   name: "HomeView",
+  mixins: [authenticationMixin],
+  props: ["authType"],
   data() {
     return {
       email: "",
       password: "",
+      authFunc: "",
     };
   },
-  methods: {
-    login() {
-      const auth = getAuth(app);
-      signInWithEmailAndPassword(auth, this.email, this.password)
-        .then(() => {
-          this.$router.push("/dashboard");
-        })
-        .catch((error) => {
-          alert(error.message);
-        });
-    },
+  created() {
+    if (this.authType === "Login") {
+      this.authFunc = this.login;
+    } else {
+      this.authFunc = this.register;
+    }
   },
 };
 </script>
