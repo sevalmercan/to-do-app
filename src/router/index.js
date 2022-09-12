@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import LoginView from "../views/login-view.vue";
-import ToDoApp from "../../src/to-do-app.vue";
+import ToDoApp from "../views/to-do-app.vue";
 Vue.use(VueRouter);
 
 const routes = [
