@@ -39,14 +39,14 @@ const router = new VueRouter({
 });
 
 const auth = getAuth(app);
-let currentUser = false;
-onAuthStateChanged(auth, (user) => {
-  currentUser = user;
-});
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.authRequired)) {
-    if (currentUser) {
+    let currrentUser =   onAuthStateChanged(auth, (user) => {
+      return user;
+    
+    }); 
+    if (currrentUser) {
       next();
     } else {
       alert("You must be logged in to see this page");
