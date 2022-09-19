@@ -4,20 +4,27 @@ import { app } from "../../firebase";
 import VueRouter from "vue-router";
 import Authentication from "../../src/views/authentication.vue";
 import ToDoApp from "../views/to-do-app.vue";
+import Home from "../views/Home.vue"
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Authentication,
-    props: { authType: "Login" },
-  },
-  {
-    path: "/register",
-    name: "register",
-    component: Authentication,
-    props: { authType: "Register" },
+    component: Home,
+    children: [
+      {
+        path: '/',
+        component: Authentication,
+        props: { authType: "Login" }
+      },
+      {
+        path: 'register',
+        component: Authentication,
+        props: { authType: "Register" }
+      }
+    ]
+
   },
   {
     path: "/dashboard",

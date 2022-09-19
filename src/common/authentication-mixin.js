@@ -21,7 +21,6 @@ export default {
         });
     },
     logOut() {
-      const auth = getAuth(app);
       signOut(auth)
         .then(() => {
           this.$router.push("/");
@@ -31,7 +30,6 @@ export default {
         });
     },
     login() {
-      const auth = getAuth(app);
       signInWithEmailAndPassword(auth, this.email, this.password)
         .then(() => {
           this.$router.push("/dashboard");

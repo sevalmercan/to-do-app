@@ -1,17 +1,11 @@
 <template>
   <div class="home">
-    <nav>
-      <router-link to="/">Sign In</router-link> |
-      <router-link to="/register">Register</router-link>
-    </nav>
-    <div>
       <form @submit.prevent="authFunc" class="login">
         <h2>{{ authType }}</h2>
         <input type="email" placeholder="Email address..." v-model="email" />
         <input type="password" placeholder="password..." v-model="password" />
         <button type="submit">{{ authType }}</button>
       </form>
-    </div>
   </div>
 </template>
 
