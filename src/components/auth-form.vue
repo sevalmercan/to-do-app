@@ -10,26 +10,25 @@
 </template>
 
 <script>
-import authenticationMixin from "@/common/authentication-mixin";
 
 export default {
   name: "HomeView",
-  mixins: [authenticationMixin],
-  props: ["authType"],
+  props: {
+    authType:String
+  },
   data() {
     return {
       email: "",
       password: "",
-      authFunc: "",
+   
     };
   },
-  created() {
-    if (this.authType === "Login") {
-      this.authFunc = this.login;
-    } else {
-      this.authFunc = this.register;
+  methods:{
+    authFunc(){
+      this.$emit('submit', {email :this.email,password:this.password});
     }
-  },
+  }
+  
 };
 </script>
 

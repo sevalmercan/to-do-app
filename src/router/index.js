@@ -2,26 +2,25 @@ import Vue from "vue";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { app } from "../../firebase";
 import VueRouter from "vue-router";
-import Authentication from "../../src/views/authentication.vue";
 import ToDoApp from "../views/to-do-app.vue";
-import Home from "../views/Home.vue"
+import HomePage from "../views/home-page.vue"
+import SignIn from "../views/sign-in.vue"
+import RegisterUser from "../views/register-user.vue"
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: HomePage,
     children: [
       {
         path: '/',
-        component: Authentication,
-        props: { authType: "Login" }
+        component: SignIn,
       },
       {
         path: 'register',
-        component: Authentication,
-        props: { authType: "Register" }
+        component: RegisterUser,
       }
     ]
 
