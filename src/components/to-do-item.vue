@@ -1,12 +1,6 @@
 <template>
   <div class="item">
-    <input
-      type="checkbox"
-      :value="val"
-      v-model="checked"
-      @change="onChange"
-      :id="id"
-    />
+    <input type="checkbox" :value="val" v-model="checked" @change="onChange" :id="id" />
     <label for="checkbox" class="item__name">{{ itemName }}</label>
     <button class="item__button" @click="deleteItem">Remove</button>
   </div>
@@ -44,7 +38,7 @@ export default {
     onChange() {
       this.$emit("input", this.checkedProxy);
       const updates = {};
-      updates["users/" + "sevalmercan" + "/tasks/"+this.id] = {
+      updates["users/" + "sevalmercan" + "/tasks/" + this.id] = {
         checked: this.checkedProxy,
         id: this.id,
         name: this.itemName,
@@ -79,6 +73,7 @@ input[type="checkbox"] {
 }
 
 .item__button {
+  border-radius: 18px;
   margin-left: auto;
   margin-right: 0;
   background-color: transparent;
