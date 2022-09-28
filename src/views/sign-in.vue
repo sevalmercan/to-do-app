@@ -1,22 +1,24 @@
 <template>
   <div class="home">
-    <auth-form @submit="onSubmit" authType="Login"/>
+    <auth-form @submit="onSubmit" authType="Login" />
+    <p>You don't have an account ? You can <router-link to="/sign-up">create one</router-link>
+    </p>
   </div>
 </template>
 
 <script>
-import { signInWithEmailAndPassword ,getAuth} from "firebase/auth";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 
-import { app } from "../../firebase";
+import { appx } from "../../firebase";
 import authForm from "@/components/auth-form.vue";
 export default {
-  components: {authForm},
+  components: { authForm },
   methods: {
     onSubmit(value) {
-      const auth = getAuth(app);
+      const auth = getAuth(appx);
       signInWithEmailAndPassword(auth, value.email, value.password)
         .then(() => {
-          this.$router.push("/dashboard");
+          this.$router.replace('home')
         })
         .catch((error) => {
           alert(error.message);

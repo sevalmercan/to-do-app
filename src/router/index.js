@@ -1,39 +1,37 @@
 import Vue from "vue";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { app } from "../../firebase";
+import { getAuth } from "firebase/auth";
+import { appx } from "../../firebase";
 import VueRouter from "vue-router";
 import ToDoApp from "../views/to-do-app.vue";
-import HomePage from "../views/home-page.vue"
-import SignIn from "../views/sign-in.vue"
-import RegisterUser from "../views/register-user.vue"
+import SignIn from "../views/sign-in.vue";
+import RegisterUser from "../views/register-user.vue";
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: HomePage,
-    children: [
-      {
-        path: '/',
-        component: SignIn,
-      },
-      {
-        path: 'register',
-        component: RegisterUser,
-      }
-    ]
-
+    path: "*",
+    redirect: "/login",
   },
   {
-    path: "/dashboard",
-    name: "dashboard",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: "/",
+    redirect: "/login",
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: SignIn,
+  },
+  {
+    path: "/sign-up",
+    name: "SignUp",
+    component: RegisterUser,
+  },
+  {
+    path: "/home",
+    name: "Home",
     component: ToDoApp,
     meta: {
-      authRequired: true,
+      requiresAuth: true,
     },
   },
 ];
@@ -44,24 +42,14 @@ const router = new VueRouter({
   routes,
 });
 
-const auth = getAuth(app);
+const auth = getAuth(appx);
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.authRequired)) {
-    let currrentUser =   onAuthStateChanged(auth, (user) => {
-      return user;
-    
-    }); 
-    if (currrentUser) {
-      next();
-    } else {
-      alert("You must be logged in to see this page");
-      next({
-        path: "/",
-      });
-    }
-  } else {
-    next();
-  }
+  const currentUser = auth.currentUser;
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+
+  if (requiresAuth && !currentUser) next("login");
+  else if (!requiresAuth && currentUser) next("home");
+  else next();
 });
 export default router;

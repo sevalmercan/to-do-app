@@ -1,10 +1,18 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
+import Vue from "vue";
+import App from "./App.vue";
+import router from "./router";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { appx } from "../firebase";
+Vue.config.productionTip = false;
+let app = "";
 
-Vue.config.productionTip = false
+const auth = getAuth(appx);
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+onAuthStateChanged(auth, () => {
+  if (!app) {
+    app = new Vue({
+      router,
+      render: (h) => h(App),
+    }).$mount("#app");
+  }
+});

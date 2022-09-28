@@ -6,17 +6,17 @@
 
 <script>
 import { getAuth, signOut } from "firebase/auth";
-import { app } from "../../firebase";
+import { appx } from "../../firebase";
 export default {
   methods: {
     logOut() {
-      const auth = getAuth(app);
+      const auth = getAuth(appx);
       signOut(auth)
         .then(() => {
-          this.$router.push("/");
+          this.$router.replace('login')
         })
         .catch(() => {
-          this.$router.push("/");
+          this.$router.replace('login')
         });
     },
   },
