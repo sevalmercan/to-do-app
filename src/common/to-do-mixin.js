@@ -1,8 +1,8 @@
 import { state } from "./state";
 import { set, ref, getDatabase } from "firebase/database";
-import { appx } from "../../firebase";
+import { firebaseApp } from "../../firebase";
 import "firebase/compat/firestore";
-const database = getDatabase(appx);
+const database = getDatabase(firebaseApp);
 
 export default {
   methods: {

@@ -1,8 +1,8 @@
 import Vue from "vue";
 import { getDatabase, ref, onValue } from "firebase/database";
-import { appx } from "../../firebase";
+import { firebaseApp } from "../../firebase";
 
-const database = getDatabase(appx);
+const database = getDatabase(firebaseApp);
 
 export const state = Vue.observable({
   taskArray: [],

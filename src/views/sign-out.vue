@@ -6,11 +6,11 @@
 
 <script>
 import { getAuth, signOut } from "firebase/auth";
-import { appx } from "../../firebase";
+import { firebaseApp } from "../../firebase";
 export default {
   methods: {
     logOut() {
-      const auth = getAuth(appx);
+      const auth = getAuth(firebaseApp);
       signOut(auth)
         .then(() => {
           this.$router.replace('login')

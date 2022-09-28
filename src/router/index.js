@@ -1,6 +1,6 @@
 import Vue from "vue";
 import { getAuth } from "firebase/auth";
-import { appx } from "../../firebase";
+import { firebaseApp } from "../../firebase";
 import VueRouter from "vue-router";
 import ToDoApp from "../views/to-do-app.vue";
 import SignIn from "../views/sign-in.vue";
@@ -42,7 +42,7 @@ const router = new VueRouter({
   routes,
 });
 
-const auth = getAuth(appx);
+const auth = getAuth(firebaseApp);
 
 router.beforeEach((to, from, next) => {
   const currentUser = auth.currentUser;

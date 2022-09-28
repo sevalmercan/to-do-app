@@ -8,9 +8,9 @@
 
 <script>
 import { getDatabase, ref, update } from "firebase/database";
-import { appx } from "../../firebase";
+import { firebaseApp } from "../../firebase";
 
-const database = getDatabase(appx);
+const database = getDatabase(firebaseApp);
 export default {
   name: "to-do-item",
 

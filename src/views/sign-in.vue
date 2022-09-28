@@ -9,13 +9,13 @@
 <script>
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 
-import { appx } from "../../firebase";
+import { firebaseApp } from "../../firebase";
 import authForm from "@/components/auth-form.vue";
 export default {
   components: { authForm },
   methods: {
     onSubmit(value) {
-      const auth = getAuth(appx);
+      const auth = getAuth(firebaseApp);
       signInWithEmailAndPassword(auth, value.email, value.password)
         .then(() => {
           this.$router.replace('home')
