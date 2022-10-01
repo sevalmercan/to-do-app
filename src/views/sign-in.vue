@@ -18,7 +18,7 @@ export default {
       const auth = getAuth(firebaseApp);
       signInWithEmailAndPassword(auth, value.email, value.password)
         .then(() => {
-          this.$router.replace('home')
+          this.$router.push({ path: '/home' })
         })
         .catch((error) => {
           alert(error.message);

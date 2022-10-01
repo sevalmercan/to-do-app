@@ -19,7 +19,7 @@ export default {
         .then((userCredential) => {
           alert("Successfully registered! Please login.");
           console.log(userCredential);
-          this.$router.replace('home')
+          this.$router.push('/home')
         })
         .catch((error) => {
           alert(error.message);

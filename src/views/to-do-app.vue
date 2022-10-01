@@ -12,11 +12,22 @@
 import toDoMixin from "../common/to-do-mixin";
 import newToDo from "../components/new-to-do.vue";
 import taskContainer from "../container/task-container.vue";
+import { getAuth, signOut } from "firebase/auth";
+import { firebaseApp } from "../../firebase";
 export default {
   mixins: [toDoMixin],
   components: {
     newToDo,
     taskContainer,
+  }, mounted() {
+    window.onpopstate = () => {
+      const auth = getAuth(firebaseApp);
+      signOut(auth)
+        .then(() => {
+        })
+        .catch(() => {
+        });
+    }
   },
 };
 </script>

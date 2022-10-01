@@ -13,10 +13,10 @@ export default {
       const auth = getAuth(firebaseApp);
       signOut(auth)
         .then(() => {
-          this.$router.replace('login')
+          this.$router.push({ path: '/' })
         })
         .catch(() => {
-          this.$router.replace('login')
+          this.$router.push({ path: '/' })
         });
     },
   },
