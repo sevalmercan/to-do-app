@@ -9,10 +9,14 @@
       </button>
     </div>
     <hr />
-    <div class="collapse-menu" :class="{active: isActive}">
+    <div class="collapse-menu" :class="{active: isActive}" @drop="onDrop($event,checkedProp)" @dragover.prevent
+      @dragenter.prevent>
       <div v-for="element in taskArrayProp" :key="element.id">
-        <to-do-item v-model="element.checked" :val="element.checked" :itemName="element.name" @delete="deleteItem"
-          :id="element.id" />
+        <div @dragstart="startDrag($event, element)">
+          <to-do-item v-model="element.checked" :val="element.checked" :itemName="element.name" @delete="deleteItem"
+            :id="element.id" draggable />
+        </div>
+
       </div>
     </div>
 
@@ -33,6 +37,7 @@ export default {
   props: {
     taskArrayProp: [],
     taskHeader: String,
+    checkedProp: Boolean
   },
   components: {
     toDoItem,
@@ -41,7 +46,21 @@ export default {
     handleTransition() {
       this.buttonText = this.isActive ? "Close" : "Open"
       this.isActive = !this.isActive
-    }
+    },
+    startDrag(evt, element) {
+      evt.dataTransfer.dropEffect = 'move'
+      evt.dataTransfer.effectAllowed = 'move'
+      evt.dataTransfer.setData('itemID', element.id)
+    },
+    onDrop(evt, checkedProp) {
+      console.log(checkedProp)
+      const itemID = evt.dataTransfer.getData('itemID')
+      console.log(itemID)
+      console.log(this.taskArray)
+      const item = this.taskArray.find((item) => item.id == itemID)
+      console.log(item)
+      item.checked = checkedProp
+    },
   }
 };
 </script>

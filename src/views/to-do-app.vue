@@ -2,11 +2,11 @@
   <div>
     <new-to-do />
     <div class="tasks-container">
-      <task-container :taskArrayProp="array1" taskHeader="To Do" />
-      <task-container :taskArrayProp="array2" taskHeader="Done" />
+      <task-container :taskArrayProp="array1" taskHeader="To Do" :checkedProp="false" />
+      <task-container :taskArrayProp="array2" taskHeader="Done" :checkedProp="true" />
     </div>
   </div>
-</template>
+</template>  
 
 <script>
 import toDoMixin from "../common/to-do-mixin";
