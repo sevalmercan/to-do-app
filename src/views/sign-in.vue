@@ -8,6 +8,7 @@
 
 <script>
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 import { firebaseApp } from "../../firebase";
 import authForm from "@/components/auth-form.vue";
@@ -17,10 +18,21 @@ export default {
   components: { authForm },
   methods: {
     onSubmit(value) {
+      const database = getDatabase(firebaseApp);
+
       const auth = getAuth(firebaseApp);
       signInWithEmailAndPassword(auth, value.email, value.password)
         .then((userCredential) => {
           this.currrentUser = userCredential.user.reloadUserInfo.localId;
+          const starCountRef = ref(
+            database,
+            "users/" + this.currrentUser + "/tasks"
+          );
+
+          onValue(starCountRef, (snapshot) => {
+            const data = snapshot.val();
+            this.taskArray = data;
+          });
           this.$router.push({ path: '/home' })
         })
         .catch((error) => {
