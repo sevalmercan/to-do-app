@@ -13,7 +13,7 @@ const auth = getAuth(firebaseApp);
 onAuthStateChanged(auth, () => {
   if (auth.currentUser !== null) {
     const database = getDatabase(firebaseApp);
-
+    state.authUser = auth.currentUser.reloadUserInfo.localId;
     console.log(
       "auth nulla eşit değil",
       auth.currentUser.reloadUserInfo.localId
@@ -29,7 +29,6 @@ onAuthStateChanged(auth, () => {
     });
   }
   if (!app) {
-    console.log("deneme", auth);
     app = new Vue({
       router,
       render: (h) => h(App),

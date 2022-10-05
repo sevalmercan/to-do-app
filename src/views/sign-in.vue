@@ -22,7 +22,7 @@ export default {
       signInWithEmailAndPassword(auth, value.email, value.password)
         .then((userCredential) => {
           this.currrentUser = userCredential.user.reloadUserInfo.localId;
-
+          console.log(this.currrentUser)
           this.$router.push({ path: '/home' })
         })
         .catch((error) => {

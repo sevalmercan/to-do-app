@@ -7,7 +7,7 @@ const database = getDatabase(firebaseApp);
 export default {
   methods: {
     addNewItem(newToDo) {
-      console.log(this.currrentUser);
+      console.log(firebaseApp);
       set(
         ref(
           database,
