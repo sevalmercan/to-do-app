@@ -11,13 +11,16 @@ import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 
 import { firebaseApp } from "../../firebase";
 import authForm from "@/components/auth-form.vue";
+import toDoMixin from "@/common/to-do-mixin";
 export default {
+  mixins: [toDoMixin],
   components: { authForm },
   methods: {
     onSubmit(value) {
       const auth = getAuth(firebaseApp);
       signInWithEmailAndPassword(auth, value.email, value.password)
-        .then(() => {
+        .then((userCredential) => {
+          this.currrentUser = userCredential.user.reloadUserInfo.localId;
           this.$router.push({ path: '/home' })
         })
         .catch((error) => {

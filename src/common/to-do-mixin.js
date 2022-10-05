@@ -7,10 +7,11 @@ const database = getDatabase(firebaseApp);
 export default {
   methods: {
     addNewItem(newToDo) {
+      console.log(this.currrentUser);
       set(
         ref(
           database,
-          "users/" + "sevalmercan" + "/tasks/" + state.taskArray.length
+          "users/" + this.currrentUser + "/tasks/" + state.taskArray.length
         ),
         {
           checked: false,
@@ -20,7 +21,11 @@ export default {
       );
     },
     deleteItem(id) {
-      set(ref(database, "users/" + "sevalmercan" + "/tasks/" + id), null);
+      set(ref(database, "users/" + this.currrentUser + "/tasks/" + id), null);
+    },
+    registerUser(id) {
+      console.log("deneme");
+      set(ref(database, "users/" + id + "/tasks/"), "");
     },
   },
   computed: {
@@ -37,6 +42,14 @@ export default {
     },
     array2() {
       return this.taskArray.filter((todo) => todo.checked);
+    },
+    currrentUser: {
+      get() {
+        return state.authUser;
+      },
+      set(value) {
+        state.authUser = value;
+      },
     },
   },
 };

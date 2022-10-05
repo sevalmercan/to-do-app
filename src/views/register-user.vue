@@ -10,16 +10,17 @@ import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
 import { firebaseApp } from "../../firebase";
 import authForm from "@/components/auth-form.vue";
+import toDoMixin from "@/common/to-do-mixin";
 export default {
+  mixins: [toDoMixin],
   components: { authForm },
   methods: {
     onSubmit(value) {
       const auth = getAuth(firebaseApp);
       createUserWithEmailAndPassword(auth, value.email, value.password)
         .then((userCredential) => {
-          alert("Successfully registered! Please login.");
-          console.log(userCredential);
-          this.$router.push('/home')
+          this.registerUser(userCredential.user.reloadUserInfo.localId)
+          //this.$router.push('/home')
         })
         .catch((error) => {
           alert(error.message);

@@ -100,10 +100,15 @@ export default {
   max-height: 1000px;
   transition: max-height 2s;
   overflow: hidden;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .active {
   max-height: 0;
+  padding: 0;
   transition: max-height 0.4s;
 }
 </style>

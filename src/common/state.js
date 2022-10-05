@@ -6,6 +6,7 @@ const database = getDatabase(firebaseApp);
 
 export const state = Vue.observable({
   taskArray: [],
+  authUser: "",
 });
 
 const starCountRef = ref(database, "users/" + "sevalmercan" + "/tasks");
