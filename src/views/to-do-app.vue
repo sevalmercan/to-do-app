@@ -14,6 +14,8 @@ import newToDo from "../components/new-to-do.vue";
 import taskContainer from "../container/task-container.vue";
 import { getAuth, signOut } from "firebase/auth";
 import { firebaseApp } from "../../firebase";
+import { getDatabase, ref, onValue } from "firebase/database";
+
 export default {
   mixins: [toDoMixin],
   components: {
@@ -28,7 +30,21 @@ export default {
         .catch(() => {
         });
     }
-  },
+  }, created() {
+    const database = getDatabase(firebaseApp);
+
+    const starCountRef = ref(database, "users/" + "sevalmercan" + "/tasks");
+
+    onValue(starCountRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data.length === 0) {
+        console.log("console")
+      }
+      else {
+        this.taskArray = data;
+      }
+    });
+  }
 };
 </script>
 
