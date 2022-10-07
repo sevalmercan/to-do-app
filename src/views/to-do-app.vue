@@ -36,9 +36,11 @@ export default {
     const starCountRef = ref(database, "users/" + "sevalmercan" + "/tasks");
 
     onValue(starCountRef, (snapshot) => {
+      console.log(starCountRef)
       const data = snapshot.val();
+      console.log("data", data)
       if (data.length === 0) {
-        console.log("console")
+        this.taskArray = []
       }
       else {
         this.taskArray = data;

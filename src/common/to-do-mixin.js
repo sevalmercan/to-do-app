@@ -1,5 +1,5 @@
 import { state } from "./state";
-import { set, ref, getDatabase } from "firebase/database";
+import { set, ref, getDatabase, update } from "firebase/database";
 import { firebaseApp } from "../../firebase";
 import "firebase/compat/firestore";
 const database = getDatabase(firebaseApp);
@@ -20,7 +20,15 @@ export default {
       );
     },
     deleteItem(id) {
-      set(ref(database, "users/" + "sevalmercan" + "/tasks/" + id), null);
+      console.log(this.taskArray.length);
+      if (this.taskArray.length === 1) {
+        console.log("denemee");
+        const updates = {};
+        updates["users/" + "sevalmercan" + "/tasks/"] = "";
+        update(ref(database), updates);
+      } else if (this.taskArray.length > 0) {
+        set(ref(database, "users/" + "sevalmercan" + "/tasks/" + id), null);
+      }
     },
     registerUser(id) {
       console.log("deneme");
