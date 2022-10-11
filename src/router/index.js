@@ -2,8 +2,8 @@ import Vue from "vue";
 import { getAuth } from "firebase/auth";
 import { firebaseApp } from "@firebaseToDo";
 import VueRouter from "vue-router";
-import ToDoApp from "../views/to-do-app.vue";
-import SignIn from "../views/sign-in.vue";
+import ToDoApp from "@/views/to-do-app.vue";
+import SignIn from "@/views/sign-in.vue";
 import RegisterUser from "../views/register-user.vue";
 Vue.use(VueRouter);
 
