@@ -33,7 +33,7 @@ export default {
   }, created() {
     const database = getDatabase(firebaseApp);
 
-    const starCountRef = ref(database, "users/" + "sevalmercan" + "/tasks");
+    const starCountRef = ref(database, "users/" + this.currrentUser + "/tasks");
 
     onValue(starCountRef, (snapshot) => {
       console.log(starCountRef)

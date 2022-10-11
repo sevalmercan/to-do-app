@@ -7,10 +7,11 @@ const database = getDatabase(firebaseApp);
 export default {
   methods: {
     addNewItem(newToDo) {
+      console.log("currentuser", this.currrentUser);
       set(
         ref(
           database,
-          "users/" + "sevalmercan" + "/tasks/" + state.taskArray.length
+          "users/" + this.currrentUser + "/tasks/" + state.taskArray.length
         ),
         {
           checked: false,
@@ -20,18 +21,16 @@ export default {
       );
     },
     deleteItem(id) {
-      console.log(this.taskArray.length);
+      // When we eant to delete first element in the list we need to update the database not delete.
       if (this.taskArray.length === 1) {
-        console.log("denemee");
         const updates = {};
-        updates["users/" + "sevalmercan" + "/tasks/"] = "";
+        updates["users/" + this.currrentUser + "/tasks/"] = "";
         update(ref(database), updates);
       } else if (this.taskArray.length > 0) {
-        set(ref(database, "users/" + "sevalmercan" + "/tasks/" + id), null);
+        set(ref(database, "users/" + this.currrentUser + "/tasks/" + id), null);
       }
     },
     registerUser(id) {
-      console.log("deneme");
       set(ref(database, "users/" + id + "/tasks/"), "");
     },
   },

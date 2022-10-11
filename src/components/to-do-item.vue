@@ -9,11 +9,12 @@
 <script>
 import { getDatabase, ref, update } from "firebase/database";
 import { firebaseApp } from "../../firebase";
+import toDoMixin from "@/common/to-do-mixin";
 
 const database = getDatabase(firebaseApp);
 export default {
   name: "to-do-item",
-
+  mixins: [toDoMixin],
   props: {
     itemName: String,
     val: Boolean,
@@ -38,7 +39,7 @@ export default {
     onChange() {
       this.$emit("input", this.checkedProxy);
       const updates = {};
-      updates["users/" + "sevalmercan" + "/tasks/" + this.id] = {
+      updates["users/" + this.currrentUser + "/tasks/" + this.id] = {
         checked: this.checkedProxy,
         id: this.id,
         name: this.itemName,
