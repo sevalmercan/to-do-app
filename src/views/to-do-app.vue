@@ -32,14 +32,13 @@ export default {
     }
   }, created() {
     const database = getDatabase(firebaseApp);
-
-    const starCountRef = ref(database, "users/" + this.currrentUser + "/tasks");
-
+    const currentUser = localStorage.getItem('currrentUser');
+    const starCountRef = ref(database, "users/" + currentUser + "/tasks");
     onValue(starCountRef, (snapshot) => {
       console.log(starCountRef)
       const data = snapshot.val();
       console.log("data", data)
-      if (data.length === 0) {
+      if (data === null || data?.length === 0) {
         this.taskArray = []
       }
       else {
