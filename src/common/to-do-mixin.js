@@ -1,6 +1,6 @@
 import { state } from "./state";
 import { set, ref, getDatabase, update } from "firebase/database";
-import { firebaseApp } from "../../firebase";
+import { firebaseApp } from "@firebaseToDo";
 import "firebase/compat/firestore";
 const database = getDatabase(firebaseApp);
 const currentUser = localStorage.getItem("currrentUser");

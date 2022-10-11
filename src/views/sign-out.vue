@@ -6,7 +6,7 @@
 
 <script>
 import { getAuth, signOut } from "firebase/auth";
-import { firebaseApp } from "../../firebase";
+import { firebaseApp } from "@firebaseToDo";
 export default {
   methods: {
     logOut() {

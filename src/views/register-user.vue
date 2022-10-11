@@ -8,7 +8,7 @@
 <script>
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
-import { firebaseApp } from "../../firebase";
+import { firebaseApp } from "@firebaseToDo";
 import authForm from "@/components/auth-form.vue";
 import toDoMixin from "@/common/to-do-mixin";
 export default {

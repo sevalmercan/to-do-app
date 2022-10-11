@@ -8,7 +8,7 @@
 
 <script>
 import { getDatabase, ref, update } from "firebase/database";
-import { firebaseApp } from "../../firebase";
+import { firebaseApp } from "@firebaseToDo";
 const currentUser = localStorage.getItem("currrentUser");
 
 

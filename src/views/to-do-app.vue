@@ -13,7 +13,7 @@ import toDoMixin from "../common/to-do-mixin";
 import newToDo from "../components/new-to-do.vue";
 import taskContainer from "../container/task-container.vue";
 import { getAuth, signOut } from "firebase/auth";
-import { firebaseApp } from "../../firebase";
+import { firebaseApp } from "@firebaseToDo";
 import { getDatabase, ref, onValue } from "firebase/database";
 
 export default {

@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { firebaseApp } from "../firebase";
+import { firebaseApp } from "@firebaseToDo";
 Vue.config.productionTip = false;
 let app = "";
 
