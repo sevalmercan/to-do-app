@@ -4,9 +4,12 @@
       <div>
         {{ taskHeader }}
       </div>
-      <button @click="handleTransition" class="transition-button">
-        {{buttonText}}
-      </button>
+      <div class="button-counter-wrapper">
+        <div> {{taskArrayProp.length}} </div>
+        <button @click="handleTransition" class="transition-button">
+          {{buttonText}}
+        </button>
+      </div>
     </div>
     <hr />
     <div class="collapse-menu" :class="{active: isActive}" @drop="onDrop($event,checkedProp)" @dragover.prevent
@@ -74,6 +77,14 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .button-counter-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    width: 103px;
+  }
 }
 
 .hr {
