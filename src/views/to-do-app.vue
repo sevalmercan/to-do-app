@@ -35,9 +35,7 @@ export default {
     const currentUser = localStorage.getItem('currrentUser');
     const starCountRef = ref(database, "users/" + currentUser + "/tasks");
     onValue(starCountRef, (snapshot) => {
-      console.log(starCountRef)
       const data = snapshot.val();
-      console.log("data", data)
       if (data === null || data?.length === 0) {
         this.taskArray = []
       }

@@ -7,7 +7,6 @@ const currentUser = localStorage.getItem("currrentUser");
 export default {
   methods: {
     addNewItem(newToDo) {
-      console.log("currentuser", currentUser);
       set(
         ref(
           database,

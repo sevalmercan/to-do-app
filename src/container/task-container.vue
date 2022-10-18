@@ -29,6 +29,11 @@
 <script>
 import toDoItem from "@/components/to-do-item.vue";
 import toDoMixin from "@/common/to-do-mixin";
+import { getDatabase, ref, update } from "firebase/database";
+import { firebaseApp } from "@firebaseToDo";
+const currentUser = localStorage.getItem("currrentUser");
+
+const database = getDatabase(firebaseApp);
 export default {
   mixins: [toDoMixin],
   data() {
@@ -56,13 +61,16 @@ export default {
       evt.dataTransfer.setData('itemID', element.id)
     },
     onDrop(evt, checkedProp) {
-      console.log(checkedProp)
       const itemID = evt.dataTransfer.getData('itemID')
-      console.log(itemID)
-      console.log(this.taskArray)
       const item = this.taskArray.find((item) => item.id == itemID)
-      console.log(item)
       item.checked = checkedProp
+      const updates = {};
+      updates["users/" + currentUser + "/tasks/" + item.id] = {
+        checked: checkedProp,
+        id: item.id,
+        name: item.name,
+      };
+      update(ref(database), updates)
     },
   }
 };
@@ -111,7 +119,7 @@ export default {
   max-height: 1000px;
   transition: max-height 2s;
   overflow: hidden;
-  padding: 10px 0;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -119,7 +127,6 @@ export default {
 
 .active {
   max-height: 0;
-  padding: 0;
   transition: max-height 0.4s;
 }
 </style>
