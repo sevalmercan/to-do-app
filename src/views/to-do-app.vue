@@ -2,8 +2,8 @@
   <div>
     <new-to-do />
     <div class="tasks-container">
-      <task-container :taskArrayProp="array1" taskHeader="To Do" :checkedProp="false" />
-      <task-container :taskArrayProp="array2" taskHeader="Done" :checkedProp="true" />
+      <task-container :taskArrayProp="array1" taskHeader="To Do" />
+      <task-container :taskArrayProp="array2" taskHeader="Done" />
     </div>
   </div>
 </template>  

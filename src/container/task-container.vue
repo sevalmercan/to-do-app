@@ -12,17 +12,16 @@
       </div>
     </div>
     <hr />
-    <div class="collapse-menu" :class="{active: isActive}" @drop="onDrop($event,checkedProp)" @dragover.prevent
-      @dragenter.prevent>
-      <div v-for="element in taskArrayProp" :key="element.id">
-        <div @dragstart="startDrag($event, element)">
+    <Container class="collapse-menu" :class="{active: isActive}" @drop="onDrop" group-name="taskHeader"
+      @drag-leave="onDragLeave" @drag-enter="onDragEnter">
+      <Draggable v-for="element in taskArrayProp" :key="element.id">
+        <div :id="element.id">
           <to-do-item v-model="element.checked" :val="element.checked" :itemName="element.name" @delete="deleteItem"
-            :id="element.id" draggable />
+            :id="element.id" />
         </div>
 
-      </div>
-    </div>
-
+      </Draggable>
+    </Container>
   </div>
 </template>
 
@@ -31,6 +30,7 @@ import toDoItem from "@/components/to-do-item.vue";
 import toDoMixin from "@/common/to-do-mixin";
 import { getDatabase, ref, update } from "firebase/database";
 import { firebaseApp } from "@firebaseToDo";
+import { Container, Draggable } from "vue-dndrop";
 const currentUser = localStorage.getItem("currrentUser");
 
 const database = getDatabase(firebaseApp);
@@ -39,39 +39,42 @@ export default {
   data() {
     return {
       isActive: false,
-      buttonText: "Close"
+      buttonText: "Close",
+      isChecked: ""
     }
   },
   props: {
     taskArrayProp: [],
     taskHeader: String,
-    checkedProp: Boolean
   },
   components: {
     toDoItem,
+    Container,
+    Draggable
   },
   methods: {
     handleTransition() {
       this.buttonText = this.isActive ? "Close" : "Open"
       this.isActive = !this.isActive
     },
-    startDrag(evt, element) {
-      evt.dataTransfer.dropEffect = 'move'
-      evt.dataTransfer.effectAllowed = 'move'
-      evt.dataTransfer.setData('itemID', element.id)
-    },
-    onDrop(evt, checkedProp) {
-      const itemID = evt.dataTransfer.getData('itemID')
-      const item = this.taskArray.find((item) => item.id == itemID)
-      item.checked = checkedProp
+    onDrop(dropResult) {
+      let currentTast = this.taskArray.find(taskelement => taskelement.id === parseInt(dropResult.element.id));
       const updates = {};
-      updates["users/" + currentUser + "/tasks/" + item.id] = {
-        checked: checkedProp,
-        id: item.id,
-        name: item.name,
+      updates["users/" + currentUser + "/tasks/" + currentTast.id] = {
+        checked: this.isChecked,
+        id: currentTast.id,
+        name: currentTast.name,
       };
       update(ref(database), updates)
     },
+
+    onDragLeave() {
+      this.isChecked = this.taskHeader === "To Do"
+    },
+    onDragEnter() {
+      this.isChecked = this.taskHeader === "Done"
+    }
+
   }
 };
 </script>
