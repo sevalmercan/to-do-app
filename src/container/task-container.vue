@@ -58,20 +58,28 @@ export default {
       this.isActive = !this.isActive
     },
     onDrop(dropResult) {
-      let currentTast = this.taskArray.find(taskelement => taskelement.id === parseInt(dropResult.element.id));
+      // We need to update the tasks checkbox status to the firebase, 
+      // to do that first we find the selected task info and update in the firebase.
+      let currentTask = this.taskArray.find(taskelement => taskelement.id === parseInt(dropResult.element.id));
       const updates = {};
-      updates["users/" + currentUser + "/tasks/" + currentTast.id] = {
+      updates["users/" + currentUser + "/tasks/" + currentTask.id] = {
         checked: this.isChecked,
-        id: currentTast.id,
-        name: currentTast.name,
+        id: currentTask.id,
+        name: currentTask.name,
       };
       update(ref(database), updates)
     },
 
     onDragLeave() {
+      // The event to be emitted by the relevant container whenever a dragged 
+      // item leaves its boundaries while dragging. İf the task is dragged from the container and container  
+      // name is "To Do" meaning this task is done so isChecked should be true.
       this.isChecked = this.taskHeader === "To Do"
     },
     onDragEnter() {
+      // The event to be emitted by the relevant container whenever a dragged item enters its boundaries while dragging. 
+      // İf the task is dragged to the container and container  
+      // name is "Done" meaning this task is done so isChecked should be true.
       this.isChecked = this.taskHeader === "Done"
     }
 
@@ -122,7 +130,7 @@ export default {
   max-height: 1000px;
   transition: max-height 2s;
   overflow: hidden;
-  padding: 10px;
+  padding-top: 10px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
