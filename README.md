@@ -1,5 +1,7 @@
 # to-do-app
-
+# To Do App Preview
+![](https://media.giphy.com/media/sVA6KMp9PIoKgMc2Ty/giphy.gif)
+![](https://media.giphy.com/media/ZpvSlXS817vIQKwrpc/giphy.gif)
 ## Project setup
 ```
 npm install
