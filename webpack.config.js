@@ -1,3 +1,4 @@
+const Dotenv = require("dotenv-webpack");
 module.exports = {
   module: {
     rules: [
@@ -9,6 +10,11 @@ module.exports = {
         test: /\.scss$/,
         use: ["vue-style-loader", "css-loader", "sass-loader"],
       },
+    ],
+    plugins: [
+      new Dotenv({
+        path: "./.env",
+      }),
     ],
   },
   // plugin omitted
