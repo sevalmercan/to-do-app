@@ -9,7 +9,7 @@
 <script>
 import { getDatabase, ref, update } from "firebase/database";
 import { firebaseApp } from "@firebaseToDo";
-const currentUser = localStorage.getItem("currrentUser");
+const currentUser = localStorage.getItem("currentUser");
 
 
 const database = getDatabase(firebaseApp);

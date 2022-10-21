@@ -3,14 +3,14 @@ import { set, ref, getDatabase, update } from "firebase/database";
 import { firebaseApp } from "@firebaseToDo";
 import "firebase/compat/firestore";
 const database = getDatabase(firebaseApp);
-const currentUser = localStorage.getItem("currrentUser");
 export default {
   methods: {
     addNewItem(newToDo) {
+      console.log("currentuser", this.currentUser);
       set(
         ref(
           database,
-          "users/" + currentUser + "/tasks/" + state.taskArray.length
+          "users/" + this.currentUser + "/tasks/" + state.taskArray.length
         ),
         {
           checked: false,
@@ -23,14 +23,14 @@ export default {
       // When we eant to delete first element in the list we need to update the database not delete.
       if (this.taskArray.length === 1) {
         const updates = {};
-        updates["users/" + currentUser + "/tasks/"] = "";
+        updates["users/" + this.currentUser + "/tasks/"] = "";
         update(ref(database), updates);
       } else if (this.taskArray.length > 0) {
-        set(ref(database, "users/" + currentUser + "/tasks/" + id), null);
+        set(ref(database, "users/" + this.currentUser + "/tasks/" + id), null);
       }
     },
-    registerUser(id) {
-      set(ref(database, "users/" + id + "/tasks/"), "");
+    registerUser() {
+      -set(ref(database, "users/" + this.currentUser + "/tasks/"), "");
     },
   },
   computed: {
@@ -47,6 +47,9 @@ export default {
     },
     array2() {
       return this.taskArray.filter((todo) => todo.checked);
+    },
+    currentUser() {
+      return localStorage.getItem("currentUser");
     },
   },
 };

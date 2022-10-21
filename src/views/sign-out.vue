@@ -14,6 +14,7 @@ export default {
       signOut(auth)
         .then(() => {
           this.$router.push({ path: '/' })
+          localStorage.removeItem("currentUser");
         })
         .catch(() => {
           this.$router.push({ path: '/' })

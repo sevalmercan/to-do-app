@@ -31,7 +31,7 @@ import toDoMixin from "@/common/to-do-mixin";
 import { getDatabase, ref, update } from "firebase/database";
 import { firebaseApp } from "@firebaseToDo";
 import { Container, Draggable } from "vue-dndrop";
-const currentUser = localStorage.getItem("currrentUser");
+const currentUser = localStorage.getItem("currentUser");
 
 const database = getDatabase(firebaseApp);
 export default {

@@ -32,7 +32,7 @@ export default {
     }
   }, created() {
     const database = getDatabase(firebaseApp);
-    const currentUser = localStorage.getItem('currrentUser');
+    const currentUser = localStorage.getItem('currentUser');
     const starCountRef = ref(database, "users/" + currentUser + "/tasks");
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();

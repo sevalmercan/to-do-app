@@ -19,8 +19,10 @@ export default {
       const auth = getAuth(firebaseApp);
       createUserWithEmailAndPassword(auth, value.email, value.password)
         .then((userCredential) => {
-          this.registerUser(userCredential.user.reloadUserInfo.localId)
-          this.$router.push('/home')
+          localStorage.setItem('currentUser', userCredential.user.reloadUserInfo.localId)
+          console.log("register", userCredential.user.reloadUserInfo.localId)
+          this.registerUser()
+          this.$router.push('/login')
         })
         .catch((error) => {
           alert(error.message);
