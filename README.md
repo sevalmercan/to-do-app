@@ -2,6 +2,9 @@
 # To Do App Preview
 ![](https://media.giphy.com/media/sVA6KMp9PIoKgMc2Ty/giphy.gif)
 ![](https://media.giphy.com/media/ZpvSlXS817vIQKwrpc/giphy.gif)
+
+A to do app with firabese.
+
 ## Project setup
 ```
 npm install
